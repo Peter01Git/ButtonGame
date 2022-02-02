@@ -9,11 +9,13 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 public class Game extends JPanel implements ActionListener{
-	static final int SCREEN_WIDTH = 600;
+	static final int SCREEN_WIDTH = 800;
 	static final int SCREEN_HEIGHT = 600;
-	static final int BUTTON_POSX = SCREEN_WIDTH/2;
+	static final int BUTTON_POSX = SCREEN_WIDTH/3;
 	static final int BUTTON_POSY = SCREEN_HEIGHT/2;
 	static final int MEASURE = 400;
+	static final Color BACKROUNDCOLOR = new Color(167, 185, 24);
+	static MenuBar menuBar;
 	boolean raning;
 	boolean buttonPressed;
 	private int counter = 0;
@@ -21,10 +23,11 @@ public class Game extends JPanel implements ActionListener{
 	Game() {
 		super();
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
-		this.setBackground(Color.BLACK);
+		this.setBackground(BACKROUNDCOLOR);
 		this.setFocusable(true);
 		this.addMouseListener(new MyMouseAdapter());
 		startGame();
+		menuBar = new MenuBar(SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
 	
 	public void startGame() {
@@ -34,6 +37,7 @@ public class Game extends JPanel implements ActionListener{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		draw(g);
+		menuBar.render(g);
 	}
 	
 	public void draw(Graphics g) {
@@ -48,19 +52,28 @@ public class Game extends JPanel implements ActionListener{
 	}
 	
 	public void DrawButton(Graphics g) {
-		if (buttonPressed) {
-			g.setColor(new Color(213, 131, 21));
+		Graphics2D g2 = (Graphics2D) g;
+		Color inside;
+		Color frame;
+		if (buttonPressed) { 
+			inside = (new Color(213, 131, 21));
+			frame = (new Color(0, 0, 0));
 		}else {
-			g.setColor(new Color(255, 132, 41));
+			inside = (new Color(255, 132, 41));
+			frame = (new Color(102, 102, 102));
 		}
-		g.fillOval(BUTTON_POSX - ((int)(MEASURE/2)), BUTTON_POSY - ((int)(MEASURE/2)), MEASURE, MEASURE);
+		g2.setColor(inside);
+		g2.fillOval(BUTTON_POSX - ((int)(MEASURE/2)), BUTTON_POSY - ((int)(MEASURE/2)), MEASURE, MEASURE);
+		g2.setColor(frame);
+		g2.setStroke(new BasicStroke(5));
+		g2.drawOval(BUTTON_POSX - ((int)(MEASURE/2))+2, BUTTON_POSY - ((int)(MEASURE/2))+2, MEASURE-4, MEASURE-4);
 	}
 	
 	public void drawCounter(Graphics g) {
-		g.setColor(Color.RED);
+		g.setColor(Color.BLACK);
 		g.setFont(new Font("Ink Free", Font.BOLD, 20));
 		FontMetrics metrics = getFontMetrics(g.getFont());
-		g.drawString("Counter: " + counter, (SCREEN_WIDTH - metrics.stringWidth("Counter: " + counter))/2, (getFont().getSize()) + 20);
+		g.drawString("Counter: " + counter, (SCREEN_WIDTH - metrics.stringWidth("Counter: " + counter))/3, (getFont().getSize()) + 20);
 	}
 	
 	public void endGame() {
