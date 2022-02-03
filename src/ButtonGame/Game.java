@@ -16,6 +16,7 @@ public class Game extends JPanel implements ActionListener{
 	static final int MEASURE = 400;
 	static final Color BACKROUNDCOLOR = new Color(167, 185, 24);
 	static MenuBar menuBar;
+	private int multiplierB1 = 1;
 	boolean raning;
 	boolean buttonPressed;
 	private int counter = 0;
@@ -77,8 +78,18 @@ public class Game extends JPanel implements ActionListener{
 	}
 	
 	public void endGame() {
-		if(counter>=100) {
+		if(counter>=1000000) {
 			counter = 0;
+		}
+	}
+	
+	public void shop() {
+		if(counter>=100 && menuBar.mButton1.isButtonPressed()) {
+			menuBar.mButton1.setSell(true);
+			counter=counter-100;
+			multiplierB1++;
+		}else {
+			menuBar.mButton1.setSell(false);
 		}
 	}
 	
@@ -99,14 +110,16 @@ public class Game extends JPanel implements ActionListener{
 		public void mousePressed(MouseEvent e) {
 			if(isButtonPressed(e.getX(), e.getY())) {
 				buttonPressed = true;
-				repaint();
-				counter++;
+				counter=counter+multiplierB1;
 			}
 			menuBar.mousePressed(e.getX(), e.getY());
+			shop();
+			repaint();
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			buttonPressed = false;
+			menuBar.mouseReleased(e.getX(), e.getY());
 			repaint();
 			endGame();
 		}

@@ -14,6 +14,7 @@ public class ButtonMenuBar{
 	private int width;
 	private int height;
 	private boolean buttonPressed = false;
+	private boolean sell;
 	private String title;
 	private int plenty = 1;
 	
@@ -27,7 +28,8 @@ public class ButtonMenuBar{
 	
 	public void render(Graphics2D g2) {
 		if(buttonPressed) {
-			g2.setColor(Color.BLACK);
+			g2.setColor(Color.GRAY);
+			//g2.setColor(Color.BLACK);
 		}else {
 			g2.setColor(Color.GRAY);
 		}
@@ -40,15 +42,43 @@ public class ButtonMenuBar{
 		g2.setColor(Color.BLACK);
 		g2.setFont(new Font("Ink Free", Font.BOLD, 20));
 		FontMetrics metrics = g2.getFontMetrics(g2.getFont());
-		g2.drawString(title + plenty, (posX+width - metrics.stringWidth(title + plenty))-40, (g2.getFont().getSize()) + posY+10);
+		g2.drawString(title + plenty, (posX+width - metrics.stringWidth(title + plenty))-25, (g2.getFont().getSize()) + posY+10);
 	}
 	
 	public void mousePressed(int mPosX, int mPosY) {
 		if(pressedButton(mPosX, mPosY)) {
-			plenty++;
+			buttonPressed = true;
+			if(sell) {
+				plenty++;
+			}
 		}
 	}
+	
+	public void mouseReleased(int mPosX, int mPosY) {
+		if(pressedButton(mPosX, mPosY)) {
+			buttonPressed = false;
+		}
+	}
+
 	private boolean pressedButton(int mPosX, int mPosY) {
 		return mPosX>=posX && mPosX<=posX+width && mPosY>=posY && mPosY<=posY+height;
 	}
+
+	public boolean isSell() {
+		return sell;
+	}
+
+	public void setSell(boolean sell) {
+		this.sell = sell;
+	}
+
+	public boolean isButtonPressed() {
+		return buttonPressed;
+	}
+
+	public void setButtonPressed(boolean buttonPressed) {
+		this.buttonPressed = buttonPressed;
+	}
+	
+	
 }

@@ -11,14 +11,14 @@ public class MenuBar {
 	private int menu_width;
 	private int menu_height;
 	static final Color MENU_COLOR = Color.WHITE;
-	ButtonMenuBar mButton1, mButton2, mButton3, mButton4;
+	public ButtonMenuBar mButton1, mButton2, mButton3, mButton4;
 	
 	MenuBar(int sreenWidth, int sreenHeight, int menuPosX, int menuPosY) {
 		this.menuPosX = menuPosX;
 		this.menuPosY = menuPosY;
 		this.menu_width = sreenWidth/3;
 		this.menu_height = sreenHeight;
-		mButton1 = new ButtonMenuBar("Knopf1: ", (int)(menuPosX+menu_width/5), menuPosY+50, (int)(menu_width*3/5), 50);
+		mButton1 = new ButtonMenuBar("Oma 100$: ", (int)(menuPosX+menu_width/5), menuPosY+50, (int)(menu_width*3/5), 50);
 		mButton2 = new ButtonMenuBar("Knopf2: ", (int)(menuPosX+menu_width/5), menuPosY+150, (int)(menu_width*3/5), 50);
 		mButton3 = new ButtonMenuBar("Knopf3: ", (int)(menuPosX+menu_width/5), menuPosY+250, (int)(menu_width*3/5), 50);
 		mButton4 = new ButtonMenuBar("Knopf4: ", (int)(menuPosX+menu_width/5), menuPosY+350, (int)(menu_width*3/5), 50);
@@ -47,6 +47,13 @@ public class MenuBar {
 		mButton2.mousePressed(mPosX, mPosY);
 		mButton3.mousePressed(mPosX, mPosY);
 		mButton4.mousePressed(mPosX, mPosY);
+	}
+	
+	public void mouseReleased(int mPosX, int mPosY) {
+		mButton1.mouseReleased(mPosX, mPosY);
+		mButton2.mouseReleased(mPosX, mPosY);
+		mButton3.mouseReleased(mPosX, mPosY);
+		mButton4.mouseReleased(mPosX, mPosY);
 	}
 	
 }
