@@ -27,7 +27,7 @@ public class Game extends JPanel implements ActionListener{
 		this.setFocusable(true);
 		this.addMouseListener(new MyMouseAdapter());
 		startGame();
-		menuBar = new MenuBar(SCREEN_WIDTH, SCREEN_HEIGHT);
+		menuBar = new MenuBar(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH*2/3, 0);
 	}
 	
 	public void startGame() {
@@ -102,6 +102,7 @@ public class Game extends JPanel implements ActionListener{
 				repaint();
 				counter++;
 			}
+			menuBar.mousePressed(e.getX(), e.getY());
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {
