@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
+import MenuBar.MenuBar;
+
 public class Game extends JPanel implements ActionListener{
 	static final int SCREEN_WIDTH = 800;
 	static final int SCREEN_HEIGHT = 600;
@@ -85,11 +87,11 @@ public class Game extends JPanel implements ActionListener{
 	
 	public void shop() {
 		if(counter>=100 && menuBar.mButton1.isButtonPressed()) {
-			menuBar.mButton1.setSell(true);
+//			menuBar.mButton1.setSell(true);
 			counter=counter-100;
 			multiplierB1++;
 		}else {
-			menuBar.mButton1.setSell(false);
+//			menuBar.mButton1.setSell(false);
 		}
 	}
 	
