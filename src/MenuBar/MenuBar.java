@@ -24,7 +24,6 @@ public class MenuBar {
 			mButton[i] = new ButtonMenuBar();
 			mButton[i].setLocation((int)(menuPosX+menu_width/5), menuPosY+50+(100*i));
 			mButton[i].setSize((int)(menu_width*3/5), 50);
-			//hallo
 		}
 	}
 	
@@ -48,7 +47,8 @@ public class MenuBar {
 	public void mousePressed(int mPosX, int mPosY) {
 		for(int i=0; i<=amoundOfButton-1; i++) {
 			mButton[i].mousePressed(mPosX, mPosY);
-			mButton[i].ConsolePrintln(mButton[i].isButtonPressed()+" button "+ i);
+			if(mButton[i].isButtonPressed()) {
+			}
 		}
 	}
 	

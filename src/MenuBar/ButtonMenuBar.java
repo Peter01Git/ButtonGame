@@ -117,7 +117,7 @@ public class ButtonMenuBar{
 		this.title = title;
 	}
 
-	public boolean isButtonPressed() {
+	public boolean isButtonPressed() {  
 		return buttonPressed;
 	}
 
