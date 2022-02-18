@@ -17,7 +17,7 @@ public class Game extends JPanel implements ActionListener{
 	static final int BUTTON_POSY = SCREEN_HEIGHT/2;
 	static final int MEASURE = 400;
 	static final Color BACKROUNDCOLOR = new Color(167, 185, 24);
-	static MenuBar menuBar;
+	static Marketplace marketplace;
 	private int multiplierB1 = 1  ;
 	boolean raning;
 	boolean buttonPressed;
@@ -30,7 +30,7 @@ public class Game extends JPanel implements ActionListener{
 		this.setFocusable(true);
 		this.addMouseListener(new MyMouseAdapter());
 		startGame();
-		menuBar = new MenuBar(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH*2/3, 0);
+		marketplace = new Marketplace(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH*2/3, 0);
 	}
 	
 	public void startGame() {
@@ -40,7 +40,7 @@ public class Game extends JPanel implements ActionListener{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		draw(g);
-		menuBar.render(g);
+		marketplace.render((Graphics2D) g);
 	}
 	
 	public void draw(Graphics g) {
@@ -108,13 +108,13 @@ public class Game extends JPanel implements ActionListener{
 				buttonPressed = true;
 				counter=counter+multiplierB1;
 			}
-			menuBar.mousePressed(e.getX(), e.getY());
+			marketplace.mousePressed(e.getX(), e.getY());
 			repaint(); 
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			buttonPressed = false;
-			menuBar.mouseReleased(e.getX(), e.getY());
+			marketplace.mouseReleased(e.getX(), e.getY());
 			repaint();
 			endGame();
 		}

@@ -2,7 +2,6 @@ package MenuBar;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class MenuBar {
@@ -13,7 +12,6 @@ public class MenuBar {
 	private final int amoundOfButton = 5;
 	static final Color MENU_COLOR = Color.WHITE;
 	public ButtonMenuBar[] mButton = new ButtonMenuBar[amoundOfButton];
-	public ButtonMenuBar mButton1, mButton2, mButton3, mButton4;
 	
 	public MenuBar(int sreenWidth, int sreenHeight, int menuPosX, int menuPosY) {
 		this.menuPosX = menuPosX;
@@ -27,9 +25,24 @@ public class MenuBar {
 		}
 	}
 	
-	public void render(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
+	public void render(Graphics2D g2) {
 		setMenuBeckround(g2);
+		drawButtonMenuBar(g2);
+	}
+	
+	public void mousePressed(int mPosX, int mPosY) {
+		for(int i=0; i<=amoundOfButton-1; i++) {
+			mButton[i].mousePressed(mPosX, mPosY);
+		}
+	}
+	
+	public void mouseReleased(int mPosX, int mPosY) {
+		for(int i=0; i<=amoundOfButton-1; i++) {
+			mButton[i].mouseReleased(mPosX, mPosY);
+		}
+	}
+	
+	private void drawButtonMenuBar(Graphics2D g2) {
 		for(int i=0; i<=amoundOfButton-1; i++) {
 			mButton[i].render(g2);
 		}
@@ -43,19 +56,4 @@ public class MenuBar {
 		g2.setStroke(new BasicStroke(strock));
 		g2.drawRect(menuPosX+(int)(strock/2), menuPosY+(int)(strock/2), (menu_width)-strock+2, menu_height-strock);
 	}
-	
-	public void mousePressed(int mPosX, int mPosY) {
-		for(int i=0; i<=amoundOfButton-1; i++) {
-			mButton[i].mousePressed(mPosX, mPosY);
-			if(mButton[i].isButtonPressed()) {
-			}
-		}
-	}
-	
-	public void mouseReleased(int mPosX, int mPosY) {
-		for(int i=0; i<=amoundOfButton-1; i++) {
-			mButton[i].mouseReleased(mPosX, mPosY);
-		}
-	}
-	
 }

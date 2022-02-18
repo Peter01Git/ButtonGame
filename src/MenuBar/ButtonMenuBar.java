@@ -13,13 +13,14 @@ public class ButtonMenuBar{
 	private int posY;
 	private int width;
 	private int height;
-	private String title = "null";
-	private boolean buttonPressed = false;
+	private String title;
+	private boolean buttonPressed;
 	//extra for selling
 	private int mass = 1;
 	
 	//constructor
 	ButtonMenuBar() {
+		title = "null";
 	}
 	
 	//communication methods
