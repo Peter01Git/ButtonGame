@@ -16,11 +16,13 @@ public class ButtonMenuBar{
 	private String title;
 	private boolean buttonPressed;
 	//extra for selling
-	private int mass = 1;
+	private int mass;
 	
 	//constructor
 	ButtonMenuBar() {
 		title = "null";
+		buttonPressed = false;
+		mass = 0;
 	}
 	
 	//communication methods
@@ -44,9 +46,7 @@ public class ButtonMenuBar{
 	}
 	
 	public void mouseReleased(int mPosX, int mPosY) {
-		if(pressedButton(mPosX, mPosY)) {
 			buttonPressed = false;
-		}
 	}
 	
 	//help methods 
@@ -55,7 +55,7 @@ public class ButtonMenuBar{
 		g2.setColor(Color.BLACK);
 		g2.setFont(new Font("Ink Free", Font.BOLD, 20));
 		FontMetrics metrics = g2.getFontMetrics(g2.getFont());
-		g2.drawString(title + mass, (posX+width - metrics.stringWidth(title + mass))-25, (g2.getFont().getSize()) + posY+10);
+		g2.drawString(title + ": " + mass, (posX+width - metrics.stringWidth(title + mass))-25, (g2.getFont().getSize()) + posY+10);
 	}
 	
 	private boolean pressedButton(int mPosX, int mPosY) {
@@ -124,6 +124,14 @@ public class ButtonMenuBar{
 
 	public void setButtonPressed(boolean buttonPressed) {
 		this.buttonPressed = buttonPressed;
+	}
+
+	public int getMass() {
+		return mass;
+	}
+
+	public void setMass(int mass) {
+		this.mass = mass;
 	}
 	
 	

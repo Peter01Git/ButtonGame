@@ -18,7 +18,7 @@ public class Game extends JPanel implements ActionListener{
 	static final int MEASURE = 400;
 	static final Color BACKROUNDCOLOR = new Color(167, 185, 24);
 	static Marketplace marketplace;
-	private int multiplierB1 = 1  ;
+	private int factor = 1  ;
 	boolean raning;
 	boolean buttonPressed;
 	private static int counter = 0;
@@ -106,9 +106,13 @@ public class Game extends JPanel implements ActionListener{
 		public void mousePressed(MouseEvent e) {
 			if(isButtonPressed(e.getX(), e.getY())) {
 				buttonPressed = true;
-				counter=counter+multiplierB1;
+				factor = marketplace.getFactor();
+				counter=counter+factor;
 			}
+			marketplace.setMonny(counter);
 			marketplace.mousePressed(e.getX(), e.getY());
+			counter=counter-marketplace.getMinuend();
+			marketplace.setMinuendZero();
 			repaint(); 
 		}
 		@Override
