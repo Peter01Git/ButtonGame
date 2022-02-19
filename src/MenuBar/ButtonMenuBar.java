@@ -15,6 +15,7 @@ public class ButtonMenuBar{
 	private int height;
 	private String title;
 	private boolean buttonPressed;
+	private int counter;
 	//extra for selling
 	private int mass;
 	
@@ -53,7 +54,7 @@ public class ButtonMenuBar{
 	
 	private void drawTitle(Graphics2D g2) {
 		g2.setColor(Color.BLACK);
-		g2.setFont(new Font("Ink Free", Font.BOLD, 20));
+		g2.setFont(new Font("Ink Free", Font.BOLD, 18));
 		FontMetrics metrics = g2.getFontMetrics(g2.getFont());
 		g2.drawString(title + ": " + mass, (posX+width - metrics.stringWidth(title + mass))-25, (g2.getFont().getSize()) + posY+10);
 	}
@@ -133,6 +134,12 @@ public class ButtonMenuBar{
 	public void setMass(int mass) {
 		this.mass = mass;
 	}
-	
-	
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
 }

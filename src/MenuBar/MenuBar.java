@@ -56,4 +56,8 @@ public class MenuBar {
 		g2.setStroke(new BasicStroke(strock));
 		g2.drawRect(menuPosX+(int)(strock/2), menuPosY+(int)(strock/2), (menu_width)-strock+2, menu_height-strock);
 	}
+
+	public int getAmoundOfButton() {
+		return amoundOfButton;
+	}
 }
