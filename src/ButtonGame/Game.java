@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import MenuBar.MenuBar;
 
@@ -74,7 +75,7 @@ public class Game extends JPanel implements ActionListener{
 	
 	public void drawCounter(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.setFont(new Font("Ink Free", Font.BOLD, 20));
+		g.setFont(new Font("Ink Free", Font.BOLD + SwingConstants.CENTER, 20));
 		FontMetrics metrics = getFontMetrics(g.getFont());
 		g.drawString("Counter: " + counter, (SCREEN_WIDTH - metrics.stringWidth("Counter: " + counter))/3, (getFont().getSize()) + 20);
 	}
