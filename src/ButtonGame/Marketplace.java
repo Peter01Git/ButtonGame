@@ -13,9 +13,11 @@ public class Marketplace {
 	private int monny;
 	private int factor;
 	private boolean[] ButtonSetub;
+	private String[][] buttonData;
 	
 	static MenuBar menuBar;
 	
+	//constructor
 	Marketplace(int posX, int posY, int width, int height) {
 		this.posX = posX;
 		this.posY = posY;
@@ -23,23 +25,28 @@ public class Marketplace {
 		this.width = width;
 		menuBar = new MenuBar(posX, posY, width, height);
 		ButtonSetub = new boolean[menuBar.getAmoundOfButton()];
+		buttonData = new String[2][menuBar.getAmoundOfButton()];
+		setButttonData();
 		for(int i=0; i<=menuBar.getAmoundOfButton()-1; i++) {
 			ButtonSetub[i] = true;
 			}
 		factor = 1;
-		oma();
-//		Baker();
+		shopping();
 	}
-	
+	//initialization methods
+	private void setButttonData() { 
+		buttonData[0][0] = "Oma";
+		buttonData[1][0] = "1";
+		buttonData[0][1] = "Bäcker";
+		buttonData[1][1] = "10";
+	}
+	//communication methods
 	public void render(Graphics2D g2d) {
 		menuBar.render(g2d);
 	}
 	
 	public void mousePressed(int mPosX, int mPosY) {
 		menuBar.mousePressed(mPosX, mPosY);
-		System.out.println(menuBar.mButton[0].isButtonPressed());
-		System.out.println(menuBar.mButton[1].isButtonPressed());
-		System.out.println(" ");
 		shopping();
 	}
 	
@@ -47,26 +54,28 @@ public class Marketplace {
 		menuBar.mouseReleased(mPosX, mPosY);
 	}
 	
+	//help methods
 	private void shopping() {
-//		"Oma" button
-		oma();
-//		Baker();
-//		if(menuBar.mButton[0].isButtonPressed() && monny>=costs[0] && monny>=0) {
-//			int oma = 1;
-//			minuend=costs[0];
-//			costs[0] = costs[0] + oma;
-//			menuBar.mButton[0].setMass(costs[0]);
-//			factor = factor + oma;
-//		}
+		try {
+			menuButton(0);
+			menuButton(1);
+			}
+		catch(Exception e) {
+			for(int i=0; i<=menuBar.getAmoundOfButton()-1; i++) {
+				buttonData[0][i] = "null";
+				buttonData[1][i] = "0";
+				}
+			for(int i=0; i<=menuBar.getAmoundOfButton()-1; i++) {
+				menuButton(i);
+				}
+			}
 	}
 	
-	private void oma() {
-		int factorOfButton = 1;
-		int buttonNumber = 0; // is the start number of the button and it isn´t allowt to be bigger then "menuBar.getAmoundOfButton()"  
+	private void menuButton(int buttonNumber) {
+		int factorOfButton = 1;// is the start number of the button and it isn´t allowt to be bigger then "menuBar.getAmoundOfButton()"  
 		if(ButtonSetub[buttonNumber]) { // starts one time
-			menuBar.mButton[buttonNumber].setCosts(1); // tells how big is the costs of the button 
-			menuBar.mButton[buttonNumber].setTitle("Oma");
-			menuBar.mButton[buttonNumber].setCosts(1);
+			menuBar.mButton[buttonNumber].setTitle(buttonData[0][buttonNumber]);
+			menuBar.mButton[buttonNumber].setCosts(Integer.parseInt(buttonData[1][buttonNumber])); // tells how big is the costs of the button 
 			ButtonSetub[buttonNumber] = false;
 		}else if(!ButtonSetub[buttonNumber]) {
 			if(menuBar.mButton[buttonNumber].isButtonPressed() && monny>=menuBar.mButton[buttonNumber].getCosts() && monny>=0) {
@@ -78,10 +87,7 @@ public class Marketplace {
 		}
 	}
 	
-	private void Baker() {
-	
-	}
-	
+	//getters and setters
 	public int getPosX() {
 		return posX;
 	}

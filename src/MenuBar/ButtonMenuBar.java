@@ -35,6 +35,17 @@ public class ButtonMenuBar{
 		drawText(g2);
 	}
 	
+	public void mousePressed(int mPosX, int mPosY) {
+		if(pressedButton(mPosX, mPosY)) {
+			buttonPressed = true;
+		}
+	}
+	
+	public void mouseReleased(int mPosX, int mPosY) {
+			buttonPressed = false;
+	}
+	
+	//help methods
 	private void renderButtonPressed(Graphics2D g2) {
 		if(buttonPressed) {
 			g2.setColor(Color.GRAY);
@@ -53,18 +64,6 @@ public class ButtonMenuBar{
 		g2.drawLine(posX+width/4, posY, posX+width/4, posY+height);
 	}
 	
-	public void mousePressed(int mPosX, int mPosY) {
-		if(pressedButton(mPosX, mPosY)) {
-			buttonPressed = true;
-		}
-	}
-	
-	public void mouseReleased(int mPosX, int mPosY) {
-			buttonPressed = false;
-	}
-	
-	//help methods
-	
 	private void drawText(Graphics2D g2) {
 		drawTitle(g2);
 		drawCosts(g2);
@@ -82,7 +81,6 @@ public class ButtonMenuBar{
 		g2.setColor(Color.BLACK);
 		g2.setFont(new Font("Akkurat", Font.BOLD + SwingConstants.CENTER, 18));
 		FontMetrics metrics = g2.getFontMetrics(g2.getFont());
-		System.out.println(5*width/8);
 		g2.drawString("K", posX+width/8 - (metrics.stringWidth("k")/2), posY+height/4+(g2.getFont().getSize()/2));
 		g2.drawString(""+costs, posX+(5*width/8) - (metrics.stringWidth("k")/2), posY+height/4+(g2.getFont().getSize()/2));
 	}

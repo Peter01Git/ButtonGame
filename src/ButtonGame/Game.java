@@ -114,6 +114,7 @@ public class Game extends JPanel implements ActionListener{
 			marketplace.mousePressed(e.getX(), e.getY());
 			counter=counter-marketplace.getMinuend();
 			marketplace.setMinuendZero();
+			System.out.println(" ");
 			repaint(); 
 		}
 		@Override
