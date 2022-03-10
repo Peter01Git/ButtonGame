@@ -12,34 +12,48 @@ public class MenuBar {
 	private final int amoundOfButton = 5;
 	static final Color MENU_COLOR = Color.WHITE;
 	public ButtonMenuBar[] mButton = new ButtonMenuBar[amoundOfButton];
+	public ScrollMenuBar scrollMenuBar = new ScrollMenuBar();
 	
-	public MenuBar(int sreenWidth, int sreenHeight, int menuPosX, int menuPosY) {
+	public MenuBar(int sreenWidth, int sreenHeight, int menuPosX, int menuPosY) { //TODO
 		this.menuPosX = menuPosX;
 		this.menuPosY = menuPosY;
 		this.menu_width = sreenWidth/3;
 		this.menu_height = sreenHeight; 
+		scrollMenuBar.setMenuArea(menuPosX, menuPosY, menu_width, menu_height);
+		setButtonData();
+	}
+	
+	private void setButtonData() {
 		for (int i=0; i<=amoundOfButton-1; i++) {
 			mButton[i] = new ButtonMenuBar();
-			mButton[i].setLocation((int)(menuPosX+menu_width/5), menuPosY+50+(100*i));
+			mButton[i].setLocation((int)(this.menuPosX+menu_width/5), this.menuPosY+50+(100*i));
 			mButton[i].setSize((int)(menu_width*3/5), 50);
 		}
 	}
 	
 	public void render(Graphics2D g2) {
+		this.menuPosX = scrollMenuBar.getMenuPosX();
+		this.menuPosY = scrollMenuBar.getMenuPosY();
+		this.menu_width = scrollMenuBar.getMenu_width();
+		this.menu_height = scrollMenuBar.getMenu_height(); 
+		setButtonData();
 		setMenuBeckround(g2);
 		drawButtonMenuBar(g2);
+		scrollMenuBar.render(g2);
 	}
 	
 	public void mousePressed(int mPosX, int mPosY) {
 		for(int i=0; i<=amoundOfButton-1; i++) {
 			mButton[i].mousePressed(mPosX, mPosY);
 		}
+		scrollMenuBar.mousePressed(mPosX, mPosY);
 	}
 	
 	public void mouseReleased(int mPosX, int mPosY) {
 		for(int i=0; i<=amoundOfButton-1; i++) {
 			mButton[i].mouseReleased(mPosX, mPosY);
 		}
+		scrollMenuBar.mouseReleased(mPosX, mPosY);
 	}
 	
 	private void drawButtonMenuBar(Graphics2D g2) {

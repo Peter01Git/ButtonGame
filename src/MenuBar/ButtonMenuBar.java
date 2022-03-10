@@ -177,5 +177,4 @@ public class ButtonMenuBar{
 		this.stage = stage;
 	}
 	
-	
 }

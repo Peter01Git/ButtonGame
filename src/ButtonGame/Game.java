@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -30,6 +31,7 @@ public class Game extends JPanel implements ActionListener{
 		this.setBackground(BACKROUNDCOLOR);
 		this.setFocusable(true);
 		this.addMouseListener(new MyMouseAdapter());
+		this.addMouseMotionListener(new MyMouseMotionAdapter());
 		startGame();
 		marketplace = new Marketplace(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH*2/3, 0);
 	}
@@ -123,6 +125,13 @@ public class Game extends JPanel implements ActionListener{
 			marketplace.mouseReleased(e.getX(), e.getY());
 			repaint();
 			endGame();
+		}
+	}
+	public class MyMouseMotionAdapter extends MouseMotionAdapter {
+		@Override
+		public void mouseDragged(MouseEvent e) {
+			marketplace.menuBar.scrollMenuBar.mouseDragged(e.getX(), e.getY());
+			repaint(); 
 		}
 	}
 }
