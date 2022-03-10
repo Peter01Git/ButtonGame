@@ -38,10 +38,21 @@ public class Marketplace {
 	}
 	//initialization methods
 	private void setButttonData() { 
-		buttonData[0][0] = "Oma";
-		buttonData[1][0] = "1";
-		buttonData[0][1] = "Bäcker";
-		buttonData[1][1] = "10";
+		try {
+			buttonData[0][0] = "Oma";
+			buttonData[1][0] = "1";
+			buttonData[0][1] = "Bäcker";
+			buttonData[1][1] = "10";
+			}
+		catch(Exception e) {
+			for(int i=0; i<=menuBar.getAmoundOfButton()-1; i++) {
+				buttonData[0][i] = "null";
+				buttonData[1][i] = "0";
+				}
+			for(int i=0; i<=menuBar.getAmoundOfButton()-1; i++) {
+				menuButton(i, 0);
+				}
+		}
 	}
 	//communication methods
 	public void render(Graphics2D g2d) {
@@ -71,7 +82,7 @@ public class Marketplace {
 			for(int i=0; i<=menuBar.getAmoundOfButton()-1; i++) {
 				menuButton(i, 0);
 				}
-			}
+		}
 	}
 	
 	private void menuButton(int buttonNumber, int factorOfButton) {

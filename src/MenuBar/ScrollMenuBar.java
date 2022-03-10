@@ -9,13 +9,16 @@ public class ScrollMenuBar {
 	private int menuPosY;
 	private int menu_width;
 	private int menu_height;
+	private int menuSrcollPosMax = 0;
+	private int menuSrcollPosMin = -300;
 	private boolean menuBarPressed;
 	private boolean menuBarReleased;
 	private int mouseMove;
-	private boolean isSetubMouseMove = true;
+	private boolean isSetubMouseMove;
 
 	public ScrollMenuBar() {
 		super();
+		isSetubMouseMove = true;
 		
 	}
 	
@@ -24,7 +27,7 @@ public class ScrollMenuBar {
 	}
 	
 	public void mouseDragged(int mPosX, int mPosY) {
-		if(menuBarPressed) {
+		if(menuBarPressed && menuPosY>= menuSrcollPosMin && menuPosY <= menuSrcollPosMax) {
 			if(isSetubMouseMove) {
 				mouseMove = mPosY;
 				menuPosY = menuPosY + mPosY- mouseMove;
@@ -34,6 +37,10 @@ public class ScrollMenuBar {
 				menuPosY = menuPosY + mPosY- mouseMove;
 				mouseMove = mPosY;
 			}
+		}else if(menuBarPressed && menuPosY>= menuSrcollPosMin) {
+			menuPosY = menuSrcollPosMax;
+		}else if(menuBarPressed && menuPosY <= menuSrcollPosMax) {
+			menuPosY = menuSrcollPosMin;
 		}
 	}
 	
@@ -90,5 +97,7 @@ public class ScrollMenuBar {
 	public void setMenu_height(int menu_height) {
 		this.menu_height = menu_height;
 	}
-
+	public int getScrollMenuSize() {
+		return menuSrcollPosMin*(-1);
+	}
 }
